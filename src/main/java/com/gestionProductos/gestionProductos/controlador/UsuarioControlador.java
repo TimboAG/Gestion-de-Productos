@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -22,14 +20,21 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(name="nombre") String nombre, @RequestParam(name="apellido") String apellido, @RequestParam(name="email") String email,
-            @RequestParam(name="username") String username, @RequestParam(name="password") String password, @RequestParam(name="password2") String password2,  ModelMap modelo) throws Exception {
+    public String registro(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido,
+            @RequestParam(name = "email") String email, @RequestParam(name = "username") String username,
+            @RequestParam(name = "password") String password, @RequestParam(name = "password2") String password2, ModelMap modelo) throws Exception {
         try {
             usuarioServicio.registrar(nombre, apellido, email, username, password, password2);
             modelo.put("exito", "Usuario registrado correctamente");
             return "index";
         } catch (Exception exception) {
             modelo.put("error", exception.getMessage());
+            modelo.put("nombre", nombre);
+            modelo.put("apellido", apellido);
+            modelo.put("email", email);
+            modelo.put("username", username);
+            modelo.put("password", password);
+            modelo.put("password2", password2);
             return "registro_usuario";
         }
     }
