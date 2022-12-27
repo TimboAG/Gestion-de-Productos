@@ -13,33 +13,16 @@
             <div class="row">
                 <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
                     <br>
-                    <h1 class="text-center">Registrar usuario</h1>
+                    <h1 class="text-center">Inicio de sesión </h1>
                     <div class="card-body">
-                        <form th:action="@{/registro}"  method="post">
-
-                            <div class="form-group">
-                                <label>Nombre:</label>
-                                <input type="text" name="nombre" th:value="${nombre}" class="form-control" placeholder="Escriba su nombre completo" required/>
-                            </div>
-                            <div class="form-group">
-                                <label>Apellido:</label>
-                                <input type="text" name="apellido" th:value="${apellido}" class="form-control" placeholder="Escriba su apellido" required/>
-                            </div>
+                        <form class="formulario" th:action="@{/logincheck}" method="POST">
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input type="text" name="email" th:value="${email}" class="form-control" placeholder="Ej: miemail@gmail.com"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
-                            </div>
-                            <div class="form-group">
-                                <label>Nombre de usuario:</label>
-                                <input type="text" name="username" th:value="${username}" class="form-control" placeholder="Escriba su nombre de usuario" required/>
+                                <input type="text" name="email" class="form-control" placeholder="Ej: miemail@gmail.com"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required/>
                             </div>
                             <div class="form-group">
                                 <label>Contraseña:</label>
-                                <input type="password" name="password" th:value="${password}" class="form-control" placeholder="Escriba su contraseña"  data-toggle="password" required/>
-                            </div>
-                            <div class="form-group">
-                                <label>Repetir contraseña:</label>
-                                <input type="password" name="password2" th:value="${password2}" class="form-control" placeholder="Repita su contraseña" required/>
+                                <input type="password" name="password" class="form-control" placeholder="Escriba su contraseña"  data-toggle="password" required/>
                             </div>
                             <div th:if="${error != null}" class="alert alert-danger" role="alert">
                                 <p class="MensajeError" th:text="${error}"></p>
@@ -48,8 +31,8 @@
                                 <p class="MensajeExito" th:text="${exito}"></p>
                             </div>
                             <div class="box-footer">
-                                <button class="btn btn-success">Registrar</button>                                
-                            </div>
+                                <button class="btn btn-success">Iniciar</button>                                
+                            </div>                            
                         </form>
                     </div>
                 </div>                
