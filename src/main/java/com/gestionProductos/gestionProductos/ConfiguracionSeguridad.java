@@ -29,13 +29,13 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
                 .and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/logincheck")
+                .loginProcessingUrl("/logincheck") //no necesita controlador
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and().logout()
-                .logoutUrl("/logout")
+                .logoutUrl("/logout")  //no necesita controlador
                 .logoutSuccessUrl("/")
                 .permitAll().and().csrf().disable();
 

@@ -5,6 +5,7 @@ import com.gestionProductos.gestionProductos.servicio.ProductoServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,11 +21,17 @@ public class ProductoControlador {
     private ProductoServicio productoServico;
 
     @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @RequestMapping("/productos")
     public String incio(Model modelo, @Param("palabraClave") String palabraClave) {
         List<Producto> listaProductos = productoServico.listAll(palabraClave);
         modelo.addAttribute("listaProductos", listaProductos);
         modelo.addAttribute("palabraClave", palabraClave);
-        return "index";
+        return "productos";
     }
 
     @RequestMapping("/nuevo")
@@ -37,7 +44,7 @@ public class ProductoControlador {
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public String guardar(@ModelAttribute("producto") Producto producto) {
         productoServico.save(producto);
-        return "redirect:/";
+        return "redirect:/productos";
     }
 
     @RequestMapping("/editar/{id}")
@@ -51,12 +58,12 @@ public class ProductoControlador {
     @RequestMapping("/eliminar/{id}")
     public String eliminar(@PathVariable(name = "id") Long id) {
         productoServico.delete(id);
-        return "redirect:/";
+        return "redirect:/productos";
     }
 
     @RequestMapping("/altaBaja/{id}")
     public String altaBaja(@PathVariable(name = "id") Long id) {
         productoServico.bajaAlta(id);
-        return "redirect:/";
+        return "redirect:/productos";
     }
 }

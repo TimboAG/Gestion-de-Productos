@@ -1,15 +1,21 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark"  style ="color: white;" >
-        <a class="navbar-brand" href="/">Control de productos</a>
+        <a class="navbar-brand" href="/productos">Control de productos</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         </div>
         <div id="navbarSupportedContent">    
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Iniciar Sesion</a>  
+                    <p class="nav-link" href="/" th:if='${session.usuariosession != null}' th:text=" 'Hola! ' + ${session.usuariosession.nombre} "></p>  
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/registrar">Registrarse</a>          
+                    <a class="nav-link" href="/login" th:if='${session.usuariosession == null}'>Iniciar Sesion</a>  
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registrar"  th:if='${session.usuariosession == null}'>Registrarse</a>          
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout"  th:if='${session.usuariosession != null}'>Cerrar Sesion</a>          
                 </li>
             </ul>   
         </div>
