@@ -35,15 +35,20 @@
                             </div>
                             <div class="form-group">
                                 <label>Contraseña:</label>
-                                <input type="password" id="password"  name="password" th:value="${password}" class="form-control" placeholder="Escriba su contraseña"  data-toggle="password" required/>
-                                <button class="btn btn-secondary" id="viewPassword"></button>
+                                <span id="viewPassword">
+                                    <img src="image/ojoCerrado.png" class="oculto" id="cerrado" width="26"  align="right" />
+                                    <img src="image/ojoAbierto.png" class="oculto" id="abierto"  width="26"  align="right" />
+                                </span>
+                                <input type="password" id="password"  name="password" th:value="${password}" class="form-control" placeholder="Escriba su contraseña"  data-toggle="password"  required/>
                             </div>
                             <div class="form-group">
                                 <label>Repetir contraseña:</label>
+                                <span   id="viewPassword2">
+                                    <img src="image/ojoCerrado.png" class="oculto" id="cerrado2" width="26"  align="right">
+                                    <img src="image/ojoAbierto.png" class="oculto" id="abierto2"  width="26"  align="right">
+                                </span>
                                 <input type="password" id="password2" name="password2" th:value="${password2}" class="form-control" placeholder="Repita su contraseña" required/>
-                                <button class="btn btn-secondary" id="viewPassword2"></button>
                             </div>
-
                             <div th:if="${error != null}" class="alert alert-danger" role="alert">
                                 <p class="MensajeError" th:text="${error}"></p>
                             </div>
@@ -63,23 +68,36 @@
             let password = document.getElementById('password');
             let password2 = document.getElementById('password2');
             let click = false;
+            let cerrado=document.getElementById('cerrado');
+            let abierto=document.getElementById('abierto');
+            let abierto2=document.getElementById('abierto2');
             let viewPassword = document.getElementById('viewPassword');
-
+            let viewPassword2 = document.getElementById('viewPassword2');
+            abierto.style.display="none";
+            abierto2.style.display="none";
             viewPassword.addEventListener('click', (e)=>{
             if(!click){
             password.type = 'text'
+            abierto.style.display="block";
+            cerrado.style.display="none";
             click = true
             }else if(click){
             password.type = 'password'
+            abierto.style.display="none";
+            cerrado.style.display="block";
             click = false
             }
             })
             viewPassword2.addEventListener('click', (e)=>{
             if(!click){
             password2.type = 'text'
+            abierto2.style.display="block";
+            cerrado2.style.display="none";
             click = true
             }else if(click){
             password2.type = 'password'
+            abierto2.style.display="none";
+            cerrado2.style.display="block";
             click = false
             }
             })

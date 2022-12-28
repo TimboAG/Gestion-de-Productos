@@ -9,9 +9,17 @@
     </head>
     <header th:replace="/fragment/navbar::header"> </header>
     <body>
+        <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/" style="text-decoration:none; color: black"> 
+                <img src="image/flecha.png" id="abierto"  width="26"/> 
+                volver
+            </a> 
+        </div>
         <div class="container text-center">
             <div class="row">
                 <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                    <br>
                     <h1 class="text-center">Registro de producto</h1>
                     <div class="card-body">
                         <form th:action="@{/guardar}" th:object="${producto}" method="post">

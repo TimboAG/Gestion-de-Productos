@@ -10,11 +10,20 @@
     <header th:replace="/fragment/navbar::header"> </header>
     <body>       
         <div class="container text-center">
-            <form class="form-inline my-2 my-lg-0" th:action="@{/}">
-                <input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" name="palabraClave" th:value="${palabraClave}" aria-label="Search" required>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Buscar">Buscar</button> &nbsp;&nbsp;
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" value="Limpiar" onclick="limpiar()">Limpiar</button>
-            </form>
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <div>  
+                        <form class="form-inline my-2 my-lg-0" th:action="@{/}">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Buscar producto" name="palabraClave" th:value="${palabraClave}" aria-label="Search" required>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Buscar">Buscar</button> &nbsp;&nbsp;
+                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" value="Limpiar" onclick="limpiar()">Limpiar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <button  class="btn btn-outline-success my-2 my-sm-0" type="button" value="Agregar" onclick="agregar()">Agregar nuevo Producto</button>
+                </div>
+            </div>
             <br>
             <table class="table">
                 <thead class="thead-dark">
@@ -46,6 +55,8 @@
         <script type="text/javascript">
             function limpiar(){
             window.location='/'; }
+            function agregar(){
+            window.location='/nuevo'; }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

@@ -16,7 +16,7 @@ public class UsuarioControlador {
 
     @GetMapping("/registrar")
     public String registrar() {
-        return "registro_usuario";
+        return "registrar_usuario";
     }
 
     @PostMapping("/registro")
@@ -35,7 +35,7 @@ public class UsuarioControlador {
             modelo.put("username", username);
             modelo.put("password", password);
             modelo.put("password2", password2);
-            return "registro_usuario";
+            return "registrar_usuario";
         }
     }
 
