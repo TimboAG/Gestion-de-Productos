@@ -6,6 +6,7 @@
         <div id="navbarSupportedContent">    
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                    <img class="rounded-circle" th:src="${session.usuariosession.imagen}"  th:if='${session.usuariosession != null}'/>
                     <p class="nav-link" href="/" th:if='${session.usuariosession != null}' th:text=" 'Hola! ' + ${session.usuariosession.nombre} "></p>  
                 </li>
                 <li class="nav-item">

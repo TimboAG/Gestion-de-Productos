@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
@@ -25,10 +26,12 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private FotoService fotoService;
    
     @Transactional
-    public void registrar(String nombre, String apellido, String email, String username, String password, String password2) throws Exception {
-        validar(nombre, apellido, email, username, password, password2);
+    public void registrar(String nombre, String apellido, String email, String username, String password, String password2,  MultipartFile foto) throws Exception {
+        validar(nombre, apellido, email, username, password, password2, foto);
         Usuario usuario = new Usuario();
         usuario.setApellido(apellido);
         usuario.setEmail(email);
@@ -36,10 +39,13 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword( new BCryptPasswordEncoder().encode(password) );
         usuario.setRol(Rol.USER);
         usuario.setUsername(username);
+        String rutaPortada= fotoService.almacenarArchivo(foto);
+        usuario.setImagen(rutaPortada);
+//        usuario.setImagen(fotoService.copiar(foto));
         usuarioRepositorio.save(usuario);
     }
 
-    private void validar(String nombre, String apellido, String email, String username, String password, String password2) throws Exception {
+    private void validar(String nombre, String apellido, String email, String username, String password, String password2, MultipartFile foto) throws Exception {
         if (nombre.isEmpty() || nombre == null) {
             throw new Exception("El nombre no puede estar estar vacío");
         }
@@ -68,6 +74,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (usuario != null) {
             throw new Exception("El email ya se encuentra registrado");
         }
+       
     }
 
     @Override

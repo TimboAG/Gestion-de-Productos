@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UsuarioControlador {
@@ -20,11 +21,11 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido,
+    public String registro(@RequestParam(name = "foto") MultipartFile foto, @RequestParam(name = "nombre") String nombre, @RequestParam(name = "apellido") String apellido,
             @RequestParam(name = "email") String email, @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password, @RequestParam(name = "password2") String password2, ModelMap modelo) throws Exception {
         try {
-            usuarioServicio.registrar(nombre, apellido, email, username, password, password2);
+            usuarioServicio.registrar(nombre, apellido, email, username, password, password2, foto);
             modelo.put("exito", "Usuario registrado correctamente");
             return "index";
         } catch (Exception exception) {
@@ -35,6 +36,8 @@ public class UsuarioControlador {
             modelo.put("username", username);
             modelo.put("password", password);
             modelo.put("password2", password2);
+            modelo.put("foto", foto);
+
             return "registrar_usuario";
         }
     }

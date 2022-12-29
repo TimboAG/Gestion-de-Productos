@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "usuario")
@@ -24,7 +26,9 @@ public class Usuario implements Serializable {
     private String password;
     @Enumerated(EnumType.STRING)
     private Rol rol;
-
+    private String imagen;
+    @Transient
+    private MultipartFile imagenPelicula;
     public Usuario() {
     }
 
@@ -37,6 +41,21 @@ public class Usuario implements Serializable {
         this.password = password;
         this.rol = rol;
     }
+
+    public Usuario(Long id, String nombre, String apellido, String email, String username, String password, Rol rol, String imagen, MultipartFile imagenPelicula) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.rol = rol;
+        this.imagen = imagen;
+        this.imagenPelicula = imagenPelicula;
+    }
+
+ 
+    
 
     public Long getId() {
         return id;
@@ -93,5 +112,22 @@ public class Usuario implements Serializable {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public MultipartFile getImagenPelicula() {
+        return imagenPelicula;
+    }
+
+    public void setImagenPelicula(MultipartFile imagenPelicula) {
+        this.imagenPelicula = imagenPelicula;
+    }
+
 
 }

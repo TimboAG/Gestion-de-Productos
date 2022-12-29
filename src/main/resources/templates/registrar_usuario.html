@@ -15,7 +15,7 @@
                     <br>
                     <h1 class="text-center">Registrar usuario</h1>
                     <div class="card-body">
-                        <form th:action="@{/registro}"  method="post">
+                        <form th:action="@{/registro}"  method="post" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <label>Nombre:</label>
@@ -32,6 +32,10 @@
                             <div class="form-group">
                                 <label>Nombre de usuario:</label>
                                 <input type="text" name="username" th:value="${username}" class="form-control" placeholder="Escriba su nombre de usuario" required/>
+                            </div>
+                             <div class="form-group">
+                                <label>Foto:</label>
+                                <input type="file" name="foto" th:value="${image}" class="form-control" placeholder="Ingrese una foto" accept="image/*" required/>
                             </div>
                             <div class="form-group">
                                 <label>Contraseña:</label>
